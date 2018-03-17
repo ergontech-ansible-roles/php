@@ -1,2 +1,3 @@
 ---
 # handlers file for php
+  service: name=php{{ php_version }}-fpm state=restarted

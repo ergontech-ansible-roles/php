@@ -1,2 +1,24 @@
 ---
-# tasks file for php
+
+- name: Add PHP-PPA
+  apt_repository:
+    repo: "ppa:ondrej/php"
+    update_cache: yes
+
+- name: Install PHP packages
+  apt:
+    name: "php{{ php_version }}-{{ item }}"
+    state: present
+    force: yes
+  with_items: "{{ php_extensions }}"
+
+- include: fpm.yml
+- include: newrelic.yml
+- include: ioncube.yml
+
+#- name: PHP configuration file
+#  ini_file:
+#    path:
+#    src: php.ini.j2
+#    dest: /etc/php/7.1/fpm/php.ini
+#  notify: reload php-fpm
