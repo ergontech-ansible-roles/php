@@ -4,21 +4,25 @@
   apt_repository:
     repo: "ppa:ondrej/php"
     update_cache: yes
+  tags:
+    - php
 
 - name: Install PHP packages
+  become: yes
   apt:
     name: "php{{ php_version }}-{{ item }}"
     state: present
-    force: yes
   with_items: "{{ php_extensions }}"
+  tags:
+    - php
+
+- name: Ensure PHP is set to use {{ php_version }}
+  become: yes
+  alternatives:
+    name: php
+    path: "/usr/bin/{{ php_version }}"
+  tags:
+    - php
 
 - include: fpm.yml
-- include: newrelic.yml
-- include: ioncube.yml
-
-#- name: PHP configuration file
-#  ini_file:
-#    path:
-#    src: php.ini.j2
-#    dest: /etc/php/7.1/fpm/php.ini
-#  notify: reload php-fpm
+  when: php_fpm_enable

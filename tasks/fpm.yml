@@ -1,16 +1,15 @@
 ---
 
-- name: "Install PHP-FPM package: {{ 'present' if php_fpm_enable else 'absent' }}"
+- name: "Install PHP-FPM package
   apt:
     name: "php{{ php_version }}-fpm"
-    state: "{{ 'present' if php_fpm_enable else 'absent' }}"
+    state: present
 
 - name: Start php fpm service
   service:
     name: php{{ php_version }}-fpm
     state: started
     enabled: yes
-  when: php_fpm_enable
 
 - name: Configure FPM pool
   template:
