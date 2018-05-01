@@ -938,7 +938,7 @@ cli_server.color = On
 [Date]
 ; Defines the default timezone used by the date functions
 ; http://php.net/date.timezone
-date.timezone = {{ php_date.timezone }}
+date.timezone = {{ php_date_timezone }}
 
 ; http://php.net/date.default-latitude
 ;date.default_latitude = 31.7667
@@ -1933,3 +1933,10 @@ opcache.fast_shutdown={{ php_opcache_fast_shutdown }}
 ; Local Variables:
 ; tab-width: 4
 ; End:
+
+{% if php_additional_configuration is defined %}
+; Additional configuration
+    {% for item in php_additional_configuration %}
+        {{ item.name }}={{ item.value }}
+    {% endfor %}
+{% endif %}
