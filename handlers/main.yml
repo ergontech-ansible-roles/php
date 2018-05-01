@@ -1,7 +1,7 @@
 ---
 
-- name: restart fpm
+- name: restart php-fpm
+  become: yes
   service:
     name: "php{{ php_version }}-fpm"
     state: restarted
-
