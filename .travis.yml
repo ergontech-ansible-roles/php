@@ -9,7 +9,7 @@ services:
 
 before_install:
   # Set some vars
-  - export container_id='test-role-container'
+  - export container_id="test-role-container"
   - export distro="ubuntu1604"
   - export init="/lib/systemd/systemd"
   - export opts="--privileged --volume=/sys/fs/cgroup:/sys/fs/cgroup:ro"

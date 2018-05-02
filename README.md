@@ -8,6 +8,9 @@ Role Variables
 
 ```
 # Varialbes with default values
+---
+
+# Specify PHP version installable via the Onrej PPA for PHP
 php_version: 5.6
 
 # List extensions installed with the following pattern:
@@ -24,7 +27,8 @@ php_extensions:
   - xml
 
 # Option to disable PHP FPM as a service
-php_fpm_install: 1
+php_fpm_install: false
+
 
 ##################
 # PHP CLI Settings
@@ -60,9 +64,9 @@ php_opcache_max_accelerated_files: 2000
 php_opcache_revalidate_freq: 2
 
 # For additional options, use this variable
-# php_additional_configuration:
-#    - name:
-#      value:
+#php_additional_configuration:
+#  - name:
+#    value:
 
 ##################
 # PHP FPM Settings
@@ -85,10 +89,14 @@ php_fpm_max_requests: 10000
 
 
 # For fpm ini additional options, use this variable
-# php_fpm_additional_configuration:
-#    - name:
-#      value:
+#php_fpm_ini_additional_configuration:
+#  - name:
+#    value:
 
+# For fpm www.conf additional options, use this variable
+#php_fpm_www_additional_configuration:
+#  - name:
+#    value:
 ```
 
 
@@ -103,6 +111,13 @@ Usage
   name: php-base
 ```
 
+Tags can be used to run only php-fpm or php-cli tasks
+
+```
+# example
+$ ansible-playbook <playbook> -t php,php-fpm
+```
+
 License
 -------
 
@@ -112,3 +127,9 @@ Author Information
 ------------------
 
 An optional section for the role authors to include contact information, or a website (HTML is not allowed).
+
+TODO's
+------
+
+- xdebug configuration
+- multiple php-fpm pools

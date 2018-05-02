@@ -33,11 +33,9 @@
 
 - import_tasks: cli.yml
   tags:
-    - php
     - php-cli
 
 - import_tasks: fpm.yml
   when: php_fpm_install
   tags:
-    - php
     - php-fpm

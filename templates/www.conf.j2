@@ -412,6 +412,9 @@ pm.max_requests = {{ php_fpm_max_requests }}
 ;php_admin_flag[log_errors] = on
 ;php_admin_value[memory_limit] = 32M
 
-{% if php_fpm_display_errors is defined and php_fpm_display_errors == 'On' %}
-php_flag[display_errors] = on
+{% if php_fpm_www_additional_configuration is defined %}
+; Additional configuration
+    {% for item in php_fpm_www_additional_configuration %}
+{{ item.name }}={{ item.value }}
+    {% endfor %}
 {% endif %}
