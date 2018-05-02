@@ -1937,6 +1937,6 @@ opcache.fast_shutdown={{ php_fpm_opcache_fast_shutdown | default(php_opcache_fas
 {% if php_additional_configuration is defined %}
 ; Additional configuration
     {% for item in php_additional_configuration %}
-        {{ item.name }}={{ item.value }}
+{{ item.name }}={{ item.value }}
     {% endfor %}
 {% endif %}
