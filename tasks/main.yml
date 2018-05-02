@@ -1,6 +1,6 @@
 ---
 
-- name: Check if php version is supported
+- name: Fail if php version is not supported
   fail:
     msg: "PHP {{ php_version }} is not in the supported_php_versions list"
   when: php_version not in supported_php_versions

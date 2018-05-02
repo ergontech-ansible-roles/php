@@ -17,7 +17,7 @@
   become: yes
   template:
     src: "templates/{{ php_version }}/fpm-php.ini.j2"
-    dest: "/etc/php/{{ php_version }}/php.ini"
+    dest: "/etc/php/{{ php_version }}/fpm/php.ini"
   notify: restart php-fpm
 
 - name: Configure FPM pool
