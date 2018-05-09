@@ -1,2 +1,5 @@
 ---
-# vars file for php
+
+supported_php_versions:
+  - 5.6
+  - 7.1

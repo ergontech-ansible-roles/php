@@ -1,19 +1,28 @@
 ---
 
-- name: "Install PHP-FPM package: {{ 'present' if php_fpm_enable else 'absent' }}"
+- name: Install PHP-FPM package
+  become: yes
   apt:
     name: "php{{ php_version }}-fpm"
-    state: "{{ 'present' if php_fpm_enable else 'absent' }}"
+    state: present
 
 - name: Start php fpm service
+  become: yes
   service:
     name: php{{ php_version }}-fpm
     state: started
     enabled: yes
-  when: php_fpm_enable
+
+- name: Ensure PHP FPM is configured via php.ini
+  become: yes
+  template:
+    src: "templates/{{ php_version }}/fpm-php.ini.j2"
+    dest: "/etc/php/{{ php_version }}/fpm/php.ini"
+  notify: restart php-fpm
 
 - name: Configure FPM pool
+  become: yes
   template:
     src: templates/www.conf.j2
     dest: "/etc/php/{{ php_version }}/fpm/pool.d/www.conf"
-
+  notify: restart php-fpm

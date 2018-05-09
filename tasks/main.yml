@@ -1,24 +1,41 @@
 ---
 
+- name: Fail if php version is not supported
+  fail:
+    msg: "PHP {{ php_version }} is not in the supported_php_versions list"
+  when: php_version not in supported_php_versions
+  tags:
+    - php
+
 - name: Add PHP-PPA
+  become: yes
   apt_repository:
     repo: "ppa:ondrej/php"
     update_cache: yes
+  tags:
+    - php
+
+- name: Install PHP version
+  become: yes
+  apt:
+    name: "php{{ php_version }}"
+  tags:
+    - php
 
 - name: Install PHP packages
+  become: yes
   apt:
     name: "php{{ php_version }}-{{ item }}"
     state: present
-    force: yes
   with_items: "{{ php_extensions }}"
+  tags:
+    - php
 
-- include: fpm.yml
-- include: newrelic.yml
-- include: ioncube.yml
+- import_tasks: cli.yml
+  tags:
+    - php-cli
 
-#- name: PHP configuration file
-#  ini_file:
-#    path:
-#    src: php.ini.j2
-#    dest: /etc/php/7.1/fpm/php.ini
-#  notify: reload php-fpm
+- import_tasks: fpm.yml
+  when: php_fpm_install
+  tags:
+    - php-fpm

@@ -1,3 +1,5 @@
+; {{ ansible_managed }}
+
 ; Start a new pool named 'www'.
 ; the variable $pool can we used in any directive and will be replaced by the
 ; pool name ('www' here)
@@ -95,7 +97,7 @@ listen.group = www-data
 ;             pm.process_idle_timeout   - The number of seconds after which
 ;                                         an idle process will be killed.
 ; Note: This value is mandatory.
-pm = dynamic
+pm = {{ php_fpm_pm }}
 
 ; The number of child processes to be created when pm is set to 'static' and the
 ; maximum number of child processes when pm is set to 'dynamic' or 'ondemand'.
@@ -409,3 +411,10 @@ pm.max_requests = {{ php_fpm_max_requests }}
 ;php_admin_value[error_log] = /var/log/fpm-php.www.log
 ;php_admin_flag[log_errors] = on
 ;php_admin_value[memory_limit] = 32M
+
+{% if php_fpm_www_additional_configuration is defined %}
+; Additional configuration
+    {% for item in php_fpm_www_additional_configuration %}
+{{ item.name }}={{ item.value }}
+    {% endfor %}
+{% endif %}

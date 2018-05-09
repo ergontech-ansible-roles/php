@@ -1,31 +1,122 @@
-Role Name
+PHP Name
 =========
 
-A brief description of the role goes here.
-
-Requirements
-------------
-
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
+Installs and configures PHP CLI and FPM
 
 Role Variables
 --------------
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
+```
+# Varialbes with default values
+---
 
-Dependencies
-------------
+# Specify PHP version installable via the Onrej PPA for PHP
+php_version: 5.6
 
-A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
+# List extensions installed with the following pattern:
+# php{{ php_version }}-{{ php_extension }}
+php_extensions:
+  - curl
+  - cli
+  - gd
+  - mysql
+  - redis
+  - mcrypt
+  - opcache
+  - xdebug
+  - xml
 
-Example Playbook
+# Option to disable PHP FPM as a service
+php_fpm_install: false
+
+
+##################
+# PHP CLI Settings
+##################
+php_disable_functions: ""
+php_disable_classes: ""
+# Resource Limits
+php_max_execution_time: 30
+php_max_input_time: 60
+php_max_input_vars: 1000
+php_memory_limit: -1
+# Date
+php_date_timezone: "etc/UTC"
+# Errors
+php_error_reporting: "E_ALL & ~E_DEPRECATED & ~E_STRICT"
+php_display_errors: "Off"
+php_display_startup_errors: "Off"
+php_log_errors: "On"
+php_error_log: "php_errors.log"
+php_log_errors_max_len: 1024
+php_track_errors: "Off"
+# Uploads
+php_upload_max_filesize: 2M
+php_max_file_uploads: 20
+php_post_max_size: 8M
+# Opcache
+php_opcache_enable: "0"
+php_opcache_enable_cli: "0"
+php_opcache_memory_consumption: 64
+php_opcache_interned_strings_buffer: 4
+php_opcache_fast_shutdown: "0"
+php_opcache_max_accelerated_files: 2000
+php_opcache_revalidate_freq: 2
+
+# For additional options, use this variable
+#php_additional_configuration:
+#  - name:
+#    value:
+
+##################
+# PHP FPM Settings
+##################
+
+# php.ini
+# -------
+# php-fpm will default to cli settings. Override with php_fpm_<setting_name>: <setting_value>
+# example php_fpm_memory_limit: 256M
+php_fpm_memory_limit: 128M
+
+# www.conf
+php_fpm_pm: dynamic
+php_fpm_listen: "/run/php{{ php_version }}-fpm.sock"
+php_fpm_max_children: 100
+php_fpm_start_servers: 20
+php_fpm_min_spare_servers: 20
+php_fpm_max_spare_servers: 40
+php_fpm_max_requests: 10000
+
+
+# For fpm ini additional options, use this variable
+#php_fpm_ini_additional_configuration:
+#  - name:
+#    value:
+
+# For fpm www.conf additional options, use this variable
+#php_fpm_www_additional_configuration:
+#  - name:
+#    value:
+```
+
+
+Usage
 ----------------
 
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
+```
+# requirements.yml
 
-    - hosts: servers
-      roles:
-         - { role: username.rolename, x: 42 }
+- src: https://github.com/ergontech-ansible-roles/php-role
+  version: master
+  name: php-base
+```
+
+Tags can be used to run only php-fpm or php-cli tasks
+
+```
+# example
+$ ansible-playbook <playbook> -t php,php-fpm
+```
 
 License
 -------
@@ -36,3 +127,9 @@ Author Information
 ------------------
 
 An optional section for the role authors to include contact information, or a website (HTML is not allowed).
+
+TODO's
+------
+
+- xdebug configuration
+- multiple php-fpm pools
