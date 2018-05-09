@@ -11,3 +11,4 @@
   template:
     src: "templates/{{ php_version }}/cli-php.ini.j2"
     dest: "/etc/php/{{ php_version }}/cli/php.ini"
+    mode: 0644
