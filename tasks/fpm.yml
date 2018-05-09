@@ -18,6 +18,7 @@
   template:
     src: "templates/{{ php_version }}/fpm-php.ini.j2"
     dest: "/etc/php/{{ php_version }}/fpm/php.ini"
+    mode: 0644
   notify: restart php-fpm
 
 - name: Configure FPM pool
@@ -25,4 +26,5 @@
   template:
     src: templates/www.conf.j2
     dest: "/etc/php/{{ php_version }}/fpm/pool.d/www.conf"
+    mode: 0644
   notify: restart php-fpm
