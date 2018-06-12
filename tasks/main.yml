@@ -39,3 +39,7 @@
   when: php_fpm_install
   tags:
     - php-fpm
+
+- import_tasks: cleanup.yml
+  tags:
+    - php
