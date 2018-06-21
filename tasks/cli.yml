@@ -1,11 +1,5 @@
 ---
 
-- name: Ensure PHP is set to use {{ php_version }}
-  become: yes
-  alternatives:
-    name: php
-    path: "/usr/bin/php{{ php_version }}"
-
 - name: Ensure PHP CLI is configured via php.ini
   become: yes
   template:

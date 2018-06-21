@@ -22,6 +22,14 @@
   tags:
     - php
 
+- name: Ensure PHP is set to use {{ php_version }}
+  become: yes
+  alternatives:
+    name: php
+    path: "/usr/bin/php{{ php_version }}"
+  tags:
+    - php
+
 - name: Install PHP packages
   become: yes
   apt:
