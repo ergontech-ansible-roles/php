@@ -11,6 +11,7 @@ php_extensions:
   - gd
   - mysql
   - redis
+  - mbstring
   - mcrypt
   - opcache
   - xdebug
@@ -18,7 +19,6 @@ php_extensions:
 
 # Option to disable PHP FPM as a service
 php_fpm_install: false
-
 
 ##################
 # PHP CLI Settings
