@@ -6,4 +6,4 @@
     name: apache2
     state: stopped
     enabled: no
-  when: php_version == 7.1
+  when: php_version >= 7.0
