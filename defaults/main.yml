@@ -1,7 +1,7 @@
 ---
 
 # Specify PHP version installable via the Onrej PPA for PHP
-php_version: 5.6
+php_version: 7.1
 
 # List extensions installed with the following pattern:
 # php{{ php_version }}-{{ php_extension }}
