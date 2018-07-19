@@ -71,12 +71,15 @@ php_fpm_memory_limit: 128M
 # www.conf
 php_fpm_pm: dynamic
 php_fpm_listen: "/run/php{{ php_version }}-fpm.sock"
+
+php_fpm_user: "www-data"
+php_fpm_group: "www-data"
+
 php_fpm_max_children: 100
 php_fpm_start_servers: 20
 php_fpm_min_spare_servers: 20
 php_fpm_max_spare_servers: 40
 php_fpm_max_requests: 10000
-
 
 # For fpm ini additional options, use this variable
 #php_fpm_ini_additional_configuration:
