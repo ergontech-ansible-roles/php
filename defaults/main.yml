@@ -92,3 +92,15 @@ php_fpm_max_requests: 10000
 #php_fpm_www_additional_configuration:
 #  - name:
 #    value:
+
+##################
+# XDebug Settings
+##################
+
+php_xdebug_additional_configuration:
+ - name: xdebug.remote_enable
+   value: 1
+ - name: xdebug.remote_connect_back
+   value: 1
+ - name: xdebug.idekey
+   value: PHPSTORM
