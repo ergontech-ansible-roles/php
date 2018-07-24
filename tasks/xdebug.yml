@@ -1,0 +1,15 @@
+---
+
+- name: Install xdebug module
+  become: yes
+  apt:
+    name: "php{{ php_version }}-xdebug"
+    state: present
+
+- name: Modify xdebug ini file
+  become: yes
+  template:
+    src: "templates/xdebug.ini.j2"
+    dest: "/etc/php/{{ php_version }}/mods-available/xdebug.ini"
+    mode: 0644
+  notify: restart php-fpm
