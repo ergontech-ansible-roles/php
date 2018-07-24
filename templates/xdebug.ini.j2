@@ -3,7 +3,7 @@
 zend_extension=xdebug.so
 
 {% if php_xdebug_additional_configuration is defined %}
-    {% for item in php_xdebug_additional_configuration %}
+{% for item in php_xdebug_additional_configuration %}
 {{ item.name }}={{ item.value }}
-    {% endfor %}
+{% endfor %}
 {% endif %}
