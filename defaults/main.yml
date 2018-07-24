@@ -14,11 +14,13 @@ php_extensions:
   - mbstring
   - mcrypt
   - opcache
-  - xdebug
   - xml
 
 # Option to disable PHP FPM as a service
 php_fpm_install: false
+
+# Option to disable installation of xdebug module
+php_xdebug_install: false
 
 ##################
 # PHP CLI Settings
