@@ -27,13 +27,16 @@ php_xdebug_install: false
 ##################
 php_disable_functions: ""
 php_disable_classes: ""
+
 # Resource Limits
 php_max_execution_time: 30
 php_max_input_time: 60
 php_max_input_vars: 1000
 php_memory_limit: -1
+
 # Date
 php_date_timezone: "etc/UTC"
+
 # Errors
 php_error_reporting: "E_ALL & ~E_DEPRECATED & ~E_STRICT"
 php_display_errors: "Off"
@@ -42,10 +45,12 @@ php_log_errors: "On"
 php_error_log: "php_errors.log"
 php_log_errors_max_len: 1024
 php_track_errors: "Off"
+
 # Uploads
 php_upload_max_filesize: 2M
 php_max_file_uploads: 20
 php_post_max_size: 8M
+
 # Opcache
 php_opcache_enable: "1"
 php_opcache_enable_cli: "1"
