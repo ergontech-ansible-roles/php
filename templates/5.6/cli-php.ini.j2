@@ -1930,7 +1930,7 @@ opcache.max_accelerated_files={{ php_opcache_max_accelerated_files }}
 
 ; When disabled, you must reset the OPcache manually or restart the
 ; webserver for changes to the filesystem to take effect.
-opcache.validate_timestamps={{ php_fpm_opcache_validate_timestamps | default(php_opcache_validate_timestamps) }}
+opcache.validate_timestamps={{ php_cli_opcache_validate_timestamps | default(php_opcache_validate_timestamps) }}
 
 ; How often (in seconds) to check file timestamps for changes to the shared
 ; memory storage allocation. ("1" means validate once per second, but only
