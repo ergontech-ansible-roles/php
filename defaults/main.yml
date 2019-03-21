@@ -53,7 +53,7 @@ php_post_max_size: 8M
 
 # Opcache
 php_opcache_enable: "1"
-php_opcache_enable_cli: "1"
+php_opcache_enable_cli: "0"
 php_opcache_fast_shutdown: "0"
 php_opcache_interned_strings_buffer: 48
 php_opcache_max_accelerated_files: 65407
