@@ -16,6 +16,8 @@ php_extensions:
   - opcache
   - xml
 
+php_use_latest: true
+
 # Option to disable PHP FPM as a service
 php_fpm_install: false
 

@@ -19,6 +19,7 @@
   become: yes
   apt:
     name: "php{{ php_version }}"
+    state: "{{ php_apt_install_state }}"
     force_apt_get: yes
   tags:
     - php
@@ -41,7 +42,7 @@
   become: yes
   apt:
     name: "{{ php_packages }}"
-    state: latest
+    state: "{{ php_apt_install_state }}"
     force_apt_get: yes
   tags:
     - php

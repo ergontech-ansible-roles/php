@@ -7,3 +7,5 @@ supported_php_versions:
   - 7.2
 
 php_packages: []
+
+php_apt_install_state: "{% if php_use_latest %}latest{% else %}present{% endif %}"
