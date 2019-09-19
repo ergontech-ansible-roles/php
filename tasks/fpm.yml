@@ -4,7 +4,8 @@
   become: yes
   apt:
     name: "php{{ php_version }}-fpm"
-    state: present
+    state: latest
+    force_apt_get: yes
 
 - name: Start php fpm service
   become: yes
