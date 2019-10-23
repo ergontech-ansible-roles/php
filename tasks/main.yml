@@ -19,6 +19,8 @@
   become: yes
   apt:
     name: "php{{ php_version }}"
+    state: "{{ php_apt_install_state }}"
+    force_apt_get: yes
   tags:
     - php
 
@@ -30,12 +32,18 @@
   tags:
     - php
 
+- name: Build PHP package list
+  set_fact:
+    php_packages: "{{ php_extensions | map('regex_replace', '^(.*)', 'php' ~ php_version ~ '-\\1') | list }}"
+  tags:
+    - php
+
 - name: Install PHP packages
   become: yes
   apt:
-    name: "php{{ php_version }}-{{ item }}"
-    state: present
-  with_items: "{{ php_extensions }}"
+    name: "{{ php_packages }}"
+    state: "{{ php_apt_install_state }}"
+    force_apt_get: yes
   tags:
     - php
 

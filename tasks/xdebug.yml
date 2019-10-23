@@ -4,7 +4,7 @@
   become: yes
   apt:
     name: "php{{ php_version }}-xdebug"
-    state: present
+    state: "{{ php_apt_install_state }}"
 
 - name: Modify xdebug ini file
   become: yes
